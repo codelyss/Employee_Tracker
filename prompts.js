@@ -27,3 +27,12 @@ module.exports.generateNumberPrompt = function (message, name, validateFunction)
     };
     return question;
 }
+
+module.exports.generateConfirmPrompt = function (message, name) {
+    var question = {
+        type: 'confirm',
+        message: message,
+        name: name
+    };
+    return question;
+}

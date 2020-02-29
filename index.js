@@ -378,6 +378,51 @@ function deleteEmployeePrompt() {
 // End of delete prompts
 
 
+function otherPrompt() {
+    let options = ["View Employees by Manager", "View the total utilized budget of a department"];
+    let question1 = prompts.generateListPrompt("Which report would you like to see?", "report", options);
+    inquirer.prompt(
+        [question1]
+    ).then(results => {
+        var report = results.report;
+        switch (report) {
+            case "View Employees by Manager":
+                otherManagersPrompt();
+                break;
+            case "View the total utilized budget of a department":
+                otherDepartmentPrompt();
+                break;
+        }
+    });
+}
+
+function otherManagersPrompt() {
+    dbchoices.getManagerChoices(function (result) {
+        let managerChoices = result;
+        let question1 = prompts.generateListPrompt("Which manager's employees would you like to see?", "managerid", managerChoices);
+        inquirer.prompt(
+            [question1]
+        ).then(results => {
+            let managerId = results.managerid;
+            display.displayEmployeesByManager(managerId);
+        });
+    });
+}
+
+function otherDepartmentPrompt() {
+    dbchoices.getDepartmentChoices(function (result) {
+        let deptChoices = result;
+        let question1 = prompts.generateListPrompt("Which department's total utilized budget would you like to see?", "deptid", deptChoices);
+        inquirer.prompt(
+            [question1]
+        ).then(results => {
+            let deptId = results.deptid;
+            display.displayDepartmentBudget(deptId);
+        });
+    });
+}
+
+
 
 
 mainPrompt();

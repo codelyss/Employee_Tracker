@@ -50,3 +50,7 @@ module.exports.insertNewEmployee = function (firstName, lastName, roleId, manage
         callBack(err != null ? err : `Successfully added ${firstName} ${lastName}.`);
     });
 }
+
+function isEmptyOrSpaces(str) {
+    return str === null || str.match(/^ *$/) !== null;
+}

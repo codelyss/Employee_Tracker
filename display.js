@@ -1,4 +1,5 @@
 const mydb = require("./mydb.js");
+const tables = require("console.table");
 
 function displayTable(err, results) {
     err != null ? console.log(err) : console.table(results);
